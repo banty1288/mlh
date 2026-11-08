@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080d19" />
+  <meta name="description" content="Solana Sentinel turns public on-chain wallet activity into understandable, evidence-based AI briefings." />
+  <title>Solana Sentinel — AI Wallet Intelligence</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar shell">
+    <a class="brand" href="#top" aria-label="Solana Sentinel home"><span class="brand-mark">S</span><span>SOLANA <b>SENTINEL</b></span></a>
+    <div class="topbar-right"><span class="network-dot"></span><span>MAINNET</span><span class="read-only-badge">READ ONLY</span><a class="top-link" href="https://explorer.solana.com/" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> ON-CHAIN INTELLIGENCE, EXPLAINED</div>
+      <h1>Your wallet tells a story.<br /><span>Understand every move.</span></h1>
+      <p class="hero-copy">Solana Sentinel reads public Solana activity and turns transaction data into a clear briefing — with AI explanations grounded in what actually happened on-chain.</p>
+      <div class="hero-tags"><span>◈ Solana RPC</span><span>✳ Gemini AI</span><span>⌁ Evidence-first analysis</span></div>
+    </section>
+
+    <section class="workspace panel" aria-labelledby="scan-title">
+      <div class="section-head"><div><div class="section-kicker">01 / INVESTIGATE</div><h2 id="scan-title">Inspect a wallet</h2></div><span class="live-label"><i></i> LIVE DATA</span></div>
+      <label for="wallet-input">Public wallet address</label>
+      <div class="wallet-row"><input id="wallet-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste a Solana public key" aria-describedby="wallet-help" /><button id="scan-button" class="primary-btn"><span>Analyze wallet</span><b>↗</b></button></div>
+      <div class="field-foot"><span id="wallet-help">Public address only. Never enter a seed phrase or private key.</span></div>
+      <div class="scan-options"><div><label for="limit-input">Transactions to inspect</label><select id="limit-input"><option value="10">10 recent</option><option value="20" selected>20 recent</option><option value="30">30 recent</option><option value="50">50 recent</option></select></div><div><label for="rpc-input">Solana RPC endpoint</label><input id="rpc-input" type="url" value="https://api.mainnet-beta.solana.com" spellcheck="false" aria-label="Solana RPC endpoint" /></div></div>
+      <div id="status" class="status" role="status" aria-live="polite"><span class="status-dot"></span><span>Ready. Enter a wallet address to begin.</span></div>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden" aria-live="polite">
+      <div class="dashboard-title"><div><div class="section-kicker">02 / WALLET OVERVIEW</div><h2>Wallet intelligence</h2><div class="wallet-identity"><span class="identity-dot"></span><code id="wallet-label">—</code><button id="copy-wallet" class="icon-btn" title="Copy wallet address" aria-label="Copy wallet address">▢</button><a id="wallet-explorer" target="_blank" rel="noreferrer" class="external-link">View on Explorer ↗</a></div></div><button id="export-button" class="secondary-btn">↓ Export report</button></div>
+      <div class="metric-grid">
+        <article class="metric-card balance-card"><div class="metric-label">SOL BALANCE <span>◎</span></div><div class="metric-value" id="sol-balance">—</div><div class="metric-note" id="balance-note">Native SOL held by wallet</div></article>
+        <article class="metric-card"><div class="metric-label">TRANSACTIONS SCANNED</div><div class="metric-value" id="tx-count">—</div><div class="metric-note" id="tx-window">Most recent signatures</div></article>
+        <article class="metric-card"><div class="metric-label">SUCCESS RATE</div><div class="metric-value" id="success-rate">—</div><div class="metric-note" id="success-note">Confirmed / inspected</div></article>
+        <article class="metric-card"><div class="metric-label">TOKEN ASSETS</div><div class="metric-value" id="token-count">—</div><div class="metric-note">Non-zero token accounts</div></article>
+      </div>
+      <div class="content-grid">
+        <section class="panel activity-panel"><div class="section-head"><div><div class="section-kicker">03 / ON-CHAIN EVIDENCE</div><h2>Recent activity</h2></div><span id="activity-count" class="count-chip">0 ITEMS</span></div><div class="table-wrap"><table><thead><tr><th>TRANSACTION</th><th>WHEN</th><th>WALLET CHANGE</th><th>STATUS</th></tr></thead><tbody id="activity-body"><tr><td colspan="4" class="empty-cell">No activity loaded.</td></tr></tbody></table></div><div class="panel-foot">Wallet change is the net SOL balance delta for this address in that transaction. It may include rent and fees.</div></section>
+        <section class="panel tokens-panel"><div class="section-head"><div><div class="section-kicker">04 / ASSET INVENTORY</div><h2>Token holdings</h2></div><span id="token-count-chip" class="count-chip">0 TOKENS</span></div><div id="token-list" class="token-list"><div class="empty-state">Token holdings will appear after a wallet scan.</div></div><div class="panel-foot">Token balances are on-chain quantities. USD values are intentionally not estimated.</div></section>
+      </div>
+      <div class="content-grid lower-grid">
+        <section class="panel signals-panel"><div class="section-head"><div><div class="section-kicker">05 / TRANSPARENCY</div><h2>Review signals</h2></div><span class="neutral-chip">HEURISTICS</span></div><div id="signals-list" class="signals-list"></div><div class="panel-foot">Signals are observable patterns, not a fraud verdict or security score.</div></section>
+        <section class="panel ai-panel"><div class="section-head"><div><div class="section-kicker">06 / AI INTERPRETATION</div><h2>Sentinel briefing</h2></div><span class="ai-chip">✳ GEMINI AI</span></div><p class="ai-intro">Ask Gemini to explain the scanned on-chain evidence in plain language. It receives a compact transaction summary, not your wallet credentials.</p><label for="gemini-key">Gemini API key <span class="optional">OPTIONAL</span></label><input id="gemini-key" type="password" autocomplete="off" placeholder="Paste your own Gemini API key" />
+          <div class="ai-controls"><select id="gemini-model" aria-label="Gemini model"><option value="gemini-3.8-flash">Gemini 3.8 Flash</option><option value="gemini-2.5-flash">Gemini 2.5 Flash (if enabled)</option></select><button id="ai-button" class="primary-btn" disabled><span>Generate briefing</span><b>✳</b></button></div>
+          <div class="key-note">Your key stays in this browser tab and is not saved by Sentinel. For a public production deployment, route AI requests through a secured server-side proxy.</div><div id="ai-output" class="ai-output"><div class="ai-placeholder"><span class="sparkle">✳</span><span>Scan a wallet, then generate an evidence-based AI briefing.</span></div></div>
+        </section>
+      </div>
+      <section class="panel details-panel"><div class="section-head"><div><div class="section-kicker">07 / TRANSACTION DETAILS</div><h2>Inspect individual transactions</h2></div><span class="count-chip">PARSED RPC DATA</span></div><div id="transaction-details" class="detail-list"><div class="empty-state">Detailed transaction evidence appears here after scanning.</div></div></section>
+      <div class="data-disclaimer"><b>Data & interpretation notice</b><p>Sentinel reads publicly available Solana mainnet data. It does not connect to a wallet, sign or submit transactions, identify wallet owners, or guarantee that an account or program is safe. RPC history may be incomplete, token symbols may be unavailable, and AI explanations can be wrong. Always verify important transactions independently.</p></div>
+    </section>
+
+    <footer class="footer"><div class="footer-brand">◈ SOLANA <b>SENTINEL</b></div><div>Built for the MLH × Solana Hackathon · AI Track</div><div><a href="https://github.com/banty1288/mlh" target="_blank" rel="noreferrer">Source repository ↗</a><span class="footer-sep">·</span><a href="https://solana.com/docs/rpc" target="_blank" rel="noreferrer">Solana RPC docs ↗</a></div></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

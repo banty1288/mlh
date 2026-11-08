@@ -1,0 +1,12 @@
+{
+  "name": "solana-sentinel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-first AI explanations for public Solana wallet activity",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check src/app.js && node --check src/utils.js && node --check server.mjs",
+    "test": "node tests/smoke.mjs && node tests/utils.test.mjs && node tests/server.test.mjs"
+  }
+}
